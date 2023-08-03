@@ -100,7 +100,7 @@ namespace ClientAppTCP.ViewModels
                 }
                 else
                 {
-                    MessageBox.Show("Enter the name", "Name", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("Enter the name", "Name Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             });
         }
