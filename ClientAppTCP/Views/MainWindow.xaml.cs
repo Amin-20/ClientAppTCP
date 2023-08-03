@@ -24,7 +24,6 @@ namespace ClientAppTCP
         public MainWindow()
         {
             InitializeComponent();
-            App.wrapPanel = TextWrapPanel;
             var vm = new MainViewModel();
             this.DataContext = vm;
         }

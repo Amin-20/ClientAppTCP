@@ -9,7 +9,6 @@ using System.Text;
 using System.Threading.Tasks;
 using ClientAppTCP.Models;
 using System.Windows;
-using ClientAppTCP.Views.UserControls;
 
 namespace ClientAppTCP.ViewModels
 {
@@ -33,6 +32,15 @@ namespace ClientAppTCP.ViewModels
             get { return serverStatus; }
             set { serverStatus = value; OnPropertyChanged(); }
         }
+        private string messageText;
+
+        public string MessageText
+        {
+            get { return messageText; }
+            set { messageText = value; OnPropertyChanged(); }
+        }
+
+
 
         public MainViewModel()
         {
@@ -43,16 +51,16 @@ namespace ClientAppTCP.ViewModels
                     Task.Run(() =>
                     {
                         var client = new TcpClient();
-                        var ip = IPAddress.Parse("10.1.18.2");
-                        var port = 27001;
+                        var ip = IPAddress.Parse("192.168.1.10");
+                        var port = 80;
 
                         var ep = new IPEndPoint(ip, port);
 
                         User user = new User
                         {
                             Name = NameTextBlock,
-                            IpAdress = "10.1.18.2",
-                            Port = 27001
+                            IpAdress = "192.168.1.10",
+                            Port = 80
                         };
 
                         var jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(user);
@@ -64,7 +72,6 @@ namespace ClientAppTCP.ViewModels
                             {
                                 var writer = Task.Run(() =>
                                 {
-
                                     var stream = client.GetStream();
                                     var bw = new BinaryWriter(stream);
                                     bw.Write(jsonString);
@@ -77,10 +84,7 @@ namespace ClientAppTCP.ViewModels
                                     {
                                         var stream = client.GetStream();
                                         var br = new BinaryReader(stream);
-                                        var messageUC = new MessageUC();
-                                        var messageUCvm = new MessageUCViewModel();
-                                        messageUCvm.MessageText = br.ReadString();
-                                        App.wrapPanel.Children.Add(messageUC);
+                                        MessageText += br.ReadString() + "\n";
                                     }
                                 });
 

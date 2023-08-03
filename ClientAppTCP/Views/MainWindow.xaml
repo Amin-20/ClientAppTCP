@@ -7,9 +7,9 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="359" Width="341">
     <Canvas>
-        <WrapPanel Name="TextWrapPanel" Height="238" Width="321" Orientation="Vertical" HorizontalAlignment="Center" Canvas.Top="49" VerticalAlignment="Top">
+        <TextBlock Text="{Binding MessageText}" FontSize="17" Height="238" Width="321" TextWrapping="Wrap" HorizontalAlignment="Center" Canvas.Top="49" VerticalAlignment="Top">
 
-        </WrapPanel>
+        </TextBlock>
         <TextBox Text="{Binding NameTextBlock}" FontSize="20" HorizontalAlignment="Left" VerticalContentAlignment="Center" VerticalAlignment="Center" Width="199" Height="44" Canvas.Left="7"></TextBox>
         <Button FontSize="14" Command="{Binding ConnectServerCommand}" Content="Connect Server" Height="44" Width="107" HorizontalAlignment="Left" Canvas.Left="211" VerticalAlignment="Center">
             <Button.Resources>
