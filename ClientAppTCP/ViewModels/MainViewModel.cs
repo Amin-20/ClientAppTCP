@@ -51,23 +51,22 @@ namespace ClientAppTCP.ViewModels
                     Task.Run(() =>
                     {
                         var client = new TcpClient();
-                        var ip = IPAddress.Parse("192.168.1.10");
-                        var port = 80;
+                        var ip = IPAddress.Parse("10.1.18.2");
+                        var port = 27001;
 
                         var ep = new IPEndPoint(ip, port);
 
-                        User user = new User
-                        {
-                            Name = NameTextBlock,
-                            IpAdress = "192.168.1.10",
-                            Port = 80
-                        };
-
-                        var jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(user);
 
                         try
                         {
                             client.Connect(ep);
+                            ServerStatus = "Connected Server";
+                            User user = new User
+                            {
+                                LocalAdress = client.Client.LocalEndPoint.ToString(),
+                                Name = NameTextBlock
+                            };
+                            var jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(user);
                             if (client.Connected)
                             {
                                 var writer = Task.Run(() =>
@@ -75,7 +74,6 @@ namespace ClientAppTCP.ViewModels
                                     var stream = client.GetStream();
                                     var bw = new BinaryWriter(stream);
                                     bw.Write(jsonString);
-
                                 });
 
                                 var reader = Task.Run(() =>

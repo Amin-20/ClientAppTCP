@@ -9,8 +9,7 @@ namespace ClientAppTCP.Models
 {
     public class User
     {
+        public string LocalAdress { get; set; }
         public string Name { get; set; }
-        public string IpAdress { get; set; }
-        public int Port { get; set; }
     }
 }
