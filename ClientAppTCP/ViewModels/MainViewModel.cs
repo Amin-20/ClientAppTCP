@@ -51,8 +51,8 @@ namespace ClientAppTCP.ViewModels
                     Task.Run(() =>
                     {
                         var client = new TcpClient();
-                        var ip = IPAddress.Parse("10.1.18.2");
-                        var port = 27001;
+                        var ip = IPAddress.Parse("192.168.1.5");
+                        var port = 80;
 
                         var ep = new IPEndPoint(ip, port);
 
@@ -87,7 +87,6 @@ namespace ClientAppTCP.ViewModels
                                 });
 
                                 Task.WaitAll(writer, reader);
-
                             }
                         }
                         catch (Exception ex)
